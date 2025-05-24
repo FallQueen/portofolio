@@ -1,0 +1,597 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Kevin Ivanu | Software Engineering Student</title>
+
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com "></script>
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter :wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- AOS Animation CSS -->
+    <link href="https://unpkg.com/aos @2.3.4/dist/aos.css" rel="stylesheet">
+
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            scroll-behavior: smooth;
+        }
+
+        .gradient-text {
+            background: linear-gradient(90deg, #60a5fa, #c084fc);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .card {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #8b5cf6, #6366f1);
+            border-radius: 999px;
+            transition: all 0.3s ease;
+        }
+
+        .btn-primary:hover {
+            transform: scale(1.05);
+            box-shadow: 0 5px 15px rgba(139, 92, 246, 0.4);
+        }
+
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 60px;
+            height: 3px;
+            background: #8b5cf6;
+            margin: 12px auto;
+            border-radius: 2px;
+        }
+
+        .progress-bar {
+            height: 8px;
+            border-radius: 999px;
+            background-color: #374151;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            border-radius: 999px;
+            background-color: #8b5cf6;
+            width: 0%;
+            transition: width 1s ease-in-out;
+        }
+
+        .card img {
+            will-change: transform;
+            backface-visibility: hidden;
+            transform: translateZ(0);
+            transition: transform 0.3s ease-in-out;
+        }
+
+        .card img:hover {
+            transform: scale(1.05);
+        }
+    </style>
+</head>
+
+<body class="bg-gray-900 text-white">
+
+    <!-- Navigation -->
+    <nav class="fixed w-full z-50 bg-gray-900 bg-opacity-90 backdrop-blur-md shadow-sm border-b border-gray-700">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <!-- Logo -->
+                <div class="flex-shrink-0 flex items-center">
+                    <span class="text-xl md:text-2xl font-bold gradient-text">Kevin Ivanu</span>
+                </div>
+
+                <!-- Desktop Menu -->
+                <div class="hidden md:flex space-x-6">
+                    <a href="#home" class="capitalize hover:text-blue-400 transition-colors duration-300">Home</a>
+                    <a href="#about" class="capitalize hover:text-blue-400 transition-colors duration-300">About Me</a>
+                    <a href="#skills" class="capitalize hover:text-blue-400 transition-colors duration-300">Skills</a>
+                    <a href="#experience"
+                        class="capitalize hover:text-blue-400 transition-colors duration-300">Experience</a>
+                    <a href="#projects"
+                        class="capitalize hover:text-blue-400 transition-colors duration-300">Projects</a>
+                    <a href="#contact" class="capitalize hover:text-blue-400 transition-colors duration-300">Contact</a>
+                </div>
+
+                <!-- Mobile Menu Button -->
+                <div class="md:hidden flex items-center">
+                    <button id="menu-toggle" class="text-gray-400 focus:outline-none">
+                        <svg id="menu-icon-open" class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M4 6h16M4 12h16M4 18h16" />
+                        </svg>
+                        <svg id="menu-icon-close" class="w-6 h-6 hidden" fill="none" stroke="currentColor"
+                            viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M6 18L18 6M6 6l12 12" />
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="hidden md:hidden bg-gray-800 py-4 rounded-b-lg border-t border-gray-700">
+            <div class="px-4 space-y-2">
+                <a href="#home" class="block px-3 py-2 capitalize rounded-md hover:bg-gray-700">Home</a>
+                <a href="#about" class="block px-3 py-2 capitalize rounded-md hover:bg-gray-700">About Me</a>
+                <a href="#skills" class="block px-3 py-2 capitalize rounded-md hover:bg-gray-700">Skills</a>
+                <a href="#experience" class="block px-3 py-2 capitalize rounded-md hover:bg-gray-700">Experience</a>
+                <a href="#projects" class="block px-3 py-2 capitalize rounded-md hover:bg-gray-700">Projects</a>
+                <a href="#contact" class="block px-3 py-2 capitalize rounded-md hover:bg-gray-700">Contact</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="pt-28 pb-16 min-h-screen flex items-center" data-aos="fade-up">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col-reverse lg:flex-row items-center gap-10">
+            <div class="lg:w-1/2 mt-8 lg:mt-0">
+                <h1 class="text-3xl sm:text-4xl lg:text-5xl font-bold leading-tight mb-4">
+                    <span class="block">Hi, I'm</span>
+                    <span class="block gradient-text">Kevin Ivanu</span>
+                </h1>
+                <p class="text-lg text-gray-300 mb-6 max-w-lg">
+                    Software Engineering student with a passion for building digital solutions and creating engaging
+                    experiences.
+                </p>
+                <div class="flex flex-wrap gap-4">
+                    <a href="#projects"
+                        class="px-5 py-3 btn-primary text-white rounded-lg transition-all duration-300 font-medium">
+                        View My Projects
+                    </a>
+                </div>
+            </div>
+            <div class="lg:w-1/2 flex justify-center">
+                <div
+                    class="relative w-48 h-48 sm:w-64 sm:h-64 rounded-full overflow-hidden shadow-xl transform rotate-3 hover:rotate-0 transition-transform duration-500 border border-gray-700">
+                    <img src="assets/myprofile.jpg" alt="Profile" class="object-cover w-full h-full" />
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="py-16 bg-gray-800" data-aos="fade-up">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl font-semibold mb-3">About Me</h2>
+                <div class="w-16 h-1 bg-purple-500 mx-auto"></div>
+                <p class="mt-4 text-gray-400 max-w-xl mx-auto">
+                    A dedicated software engineering student ready to take on new challenges and grow professionally.
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div>
+                    <h3 class="text-xl font-bold mb-3">Who I Am</h3>
+                    <p class="text-gray-300 mb-4">
+                        Kevin is a diligent and motivated student committed to professional growth and excellence. He
+                        proactively builds meaningful relationships and seeks valuable work experience to enhance his
+                        skills and knowledge.
+                    </p>
+                    <p class="text-gray-300 mb-6">
+                        Goal-oriented and adaptable, Kevin contributes effectively to team objectives through
+                        collaboration and a results-driven mindset.
+                    </p>
+                    <a href="assets/CV_KevinIvanu.pdf" download
+                        class="inline-block px-4 py-2 bg-purple-900/50 text-purple-300 rounded-full hover:bg-purple-900/80 transition-colors duration-300">
+                        Download My Resume
+                    </a>
+                </div>
+                <div class="space-y-6">
+                    <div>
+                        <h4 class="font-semibold text-lg mb-2">Education</h4>
+                        <ul class="space-y-4 text-gray-400">
+                            <li>
+                                <strong>Universitas Prasetiya Mulya</strong><br />
+                                <span class="text-sm text-gray-500">2022 – Present</span><br />
+                                B.Sc. in Software Engineering
+                            </li>
+                            <li>
+                                <strong>Tunas Daud Bali High School</strong><br />
+                                <span class="text-sm text-gray-500">2019 – 2022</span><br />
+                                Science Major
+                            </li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h4 class="font-semibold text-lg mb-2">Training</h4>
+                        <ul class="space-y-4 text-gray-400">
+                            <li>
+                                <strong>Computer Course Center Bali</strong><br />
+                                <span class="text-sm text-gray-500">August 2021 – February 2022</span><br />
+                                Microsoft Office Mastery, Web Development & SEO
+                            </li>
+                            <li>
+                                <strong>Axcelio.id</strong><br />
+                                <span class="text-sm text-gray-500">March 2022 – September 2022</span><br />
+                                Front-End Web Development, Graphic & Video Editing
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section id="skills" class="py-16" data-aos="fade-up">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl font-semibold mb-3">My Skills</h2>
+                <div class="w-16 h-1 bg-purple-500 mx-auto"></div>
+                <p class="mt-4 text-gray-400">
+                    Here are some of the tools and technologies I've worked with.
+                </p>
+            </div>
+
+            <div class="space-y-6">
+                <div>
+                    <div class="flex justify-between mb-1">
+                        <span>Python</span>
+                        <span>Proficient</span>
+                    </div>
+                    <div class="progress-bar">
+                        <div class="progress-fill" style="width: 0%" data-skill="90"></div>
+                    </div>
+                </div>
+                <div>
+                    <div class="flex justify-between mb-1">
+                        <span>WordPress</span>
+                        <span>Experienced</span>
+                    </div>
+                    <div class="progress-bar">
+                        <div class="progress-fill" style="width: 0%" data-skill="80"></div>
+                    </div>
+                </div>
+                <div>
+                    <div class="flex justify-between mb-1">
+                        <span>Adobe Premiere Pro</span>
+                        <span>Skilled</span>
+                    </div>
+                    <div class="progress-bar">
+                        <div class="progress-fill" style="width: 0%" data-skill="85"></div>
+                    </div>
+                </div>
+                <div>
+                    <div class="flex justify-between mb-1">
+                        <span>Adobe Photoshop</span>
+                        <span>Proficient</span>
+                    </div>
+                    <div class="progress-bar">
+                        <div class="progress-fill" style="width: 0%" data-skill="80"></div>
+                    </div>
+                </div>
+                <div>
+                    <div class="flex justify-between mb-1">
+                        <span>Flutter</span>
+                        <span>Capable</span>
+                    </div>
+                    <div class="progress-bar">
+                        <div class="progress-fill" style="width: 0%" data-skill="70"></div>
+                    </div>
+                </div>
+                <div>
+                    <div class="flex justify-between mb-1">
+                        <span>Figma</span>
+                        <span>Experienced</span>
+                    </div>
+                    <div class="progress-bar">
+                        <div class="progress-fill" style="width: 0%" data-skill="80"></div>
+                    </div>
+                </div>
+                <div>
+                    <div class="flex justify-between mb-1">
+                        <span>HTML & CSS</span>
+                        <span>Experienced</span>
+                    </div>
+                    <div class="progress-bar">
+                        <div class="progress-fill" style="width: 0%" data-skill="85"></div>
+                    </div>
+                </div>
+                <div>
+                    <div class="flex justify-between mb-1">
+                        <span>Microsoft Office</span>
+                        <span>Proficient</span>
+                    </div>
+                    <div class="progress-bar">
+                        <div class="progress-fill" style="width: 0%" data-skill="90"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Experience Section -->
+    <section id="experience" class="py-16 bg-gray-800" data-aos="fade-up">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl font-semibold mb-3">Work Experience</h2>
+                <div class="w-16 h-1 bg-purple-500 mx-auto"></div>
+                <p class="mt-4 text-gray-400">
+                    Professional roles and projects that shaped my journey so far.
+                </p>
+            </div>
+
+            <div class="space-y-6">
+                <div class="card bg-gray-900 p-5 rounded-lg border border-gray-700">
+                    <h3 class="text-lg font-bold">Assistant Supervisor at PT. Surya Madistrindo</h3>
+                    <p class="text-sm text-gray-500">Jan 2023 – Feb 2023</p>
+                    <ul class="mt-2 text-gray-300 list-disc pl-5 space-y-1">
+                        <li>Assisted in administrative tasks and process management</li>
+                        <li>Gained knowledge in embedded systems and their applications</li>
+                        <li>Supported daily operations to ensure efficiency in workflow</li>
+                    </ul>
+                </div>
+
+                <div class="card bg-gray-900 p-5 rounded-lg border border-gray-700">
+                    <h3 class="text-lg font-bold">Documentation at Programming Club</h3>
+                    <p class="text-sm text-gray-500">Mar 2024</p>
+                    <ul class="mt-2 text-gray-300 list-disc pl-5 space-y-1">
+                        <li>Capturing and editing engaging activity recap videos and reels</li>
+                        <li>Documenting memorable moments through video recording and editing</li>
+                        <li>Using video editing tools to enhance storytelling and audience engagement</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects" class="py-16" data-aos="fade-up">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl font-semibold mb-3">Projects</h2>
+                <div class="w-16 h-1 bg-purple-500 mx-auto"></div>
+                <p class="mt-4 text-gray-400">
+                    Some of the personal and academic projects I’ve worked on.
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <a href="https://udsarimanggar.com/ " target="_blank" rel="noopener noreferrer"
+                    class="group relative overflow-hidden rounded-xl shadow-md bg-gray-800 border border-gray-700 block hover:shadow-xl transition-shadow duration-300">
+                    <img src="assets/website.png" alt="WordPress"
+                        class="w-full h-48 object-cover transition-transform duration-500 group-hover:scale-105" />
+                    <div class="p-5">
+                        <span class="text-xs text-purple-400 uppercase tracking-wider">Web Development</span>
+                        <h3 class="text-lg font-bold mt-1">SariManggar Website</h3>
+                        <p class="text-sm text-gray-400 mt-2">
+                            A professional personal portfolio website built using WordPress and designed with Elementor
+                            for easy customization and responsive layout.
+                        </p>
+                    </div>
+                </a>
+                <!-- flutter Section -->
+                <!-- Project 2 - Flutter -->
+                <div class="relative group overflow-hidden rounded-xl shadow-md bg-gray-800 border border-gray-700 cursor-pointer"
+                    onclick="openVideoModal()">
+                    <!-- Thumbnail Image -->
+                    <div class="overflow-hidden w-full h-48">
+                        <img src="assets/flutterpreview.png" alt="flutter"
+                            class="w-full h-full object-cover transition-transform duration-300 ease-out will-change-transform" />
+
+                        <!-- Overlay Play Button (muncul saat hover) -->
+                        <div
+                            class="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 flex items-center justify-center transition-opacity duration-300">
+                            <svg class="w-12 h-12 text-white" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M8 5v14l11-7z" />
+                                <circle cx="12" cy="12" r="10" fill="rgba(0,0,0,0.4)" stroke="white" stroke-width="2" />
+                            </svg>
+                        </div>
+                    </div>
+
+                    <!-- Informasi Project -->
+                    <div class="p-5">
+                        <span class="text-xs text-purple-400 uppercase tracking-wider">App Development</span>
+                        <h3 class="text-lg font-bold mt-1">Flutter-SentulCity</h3>
+                        <p class="text-sm text-gray-400 mt-2">
+                            Built a smart city prototype app leveraging Google Maps API for geolocation, OpenWeather for
+                            real-time weather data, Django as the backend framework, and Flutter for a cross-platform
+                            mobile UI.
+                        </p>
+                    </div>
+                </div>
+                <!-- Modal Video -->
+                <div id="video-modal"
+                    class="fixed inset-0 z-50 hidden bg-black/90 backdrop-blur-sm flex items-center justify-center p-4">
+                    <div
+                        class="relative max-w-xs sm:max-w-sm md:max-w-md w-full aspect-[3/4] bg-black rounded-lg shadow-2xl">
+                        <video id="project-video" class="w-full h-full object-contain" controls muted playsinline>
+                            <source src="assets/flutter.mp4" type="video/mp4" />
+                            Browser Anda tidak mendukung tag video.
+                        </video>
+                        <button onclick="closeVideoModal()"
+                            class="absolute top-2 right-2 bg-red-600 text-white p-2 rounded-full hover:bg-red-700 z-10">
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M6 18L18 6M6 6l12 12" />
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+                <!-- end flutter Section -->
+                <a href="https://www.figma.com/files/team/1219546436443987379/project/86199899/Team-project?fuid=1219546427296412159 "
+                    target="_blank" rel="noopener noreferrer"
+                    class="group relative overflow-hidden rounded-xl shadow-md bg-gray-800 border border-gray-700 hover:shadow-xl transition-all duration-300">
+                    <img src="assets/figma.png" alt="Figma Project"
+                        class="w-full h-48 object-cover transition-transform duration-500 group-hover:scale-105" />
+                    <div class="p-5">
+                        <span class="text-xs text-purple-400 uppercase tracking-wider">UI/UX Design</span>
+                        <h3 class="text-lg font-bold mt-1">App Redesign & Flow</h3>
+                        <p class="text-sm text-gray-400 mt-2">
+                            Redesigned the user interface and user flow of a mobile application using Figma, focusing on
+                            improving usability, visual consistency, and user journey experience.
+                        </p>
+                    </div>
+                </a>
+                <a href="assets/llama-chatbot.zip" download
+                    class="group relative overflow-hidden rounded-xl shadow-md bg-gray-800 border border-gray-700 block cursor-pointer">
+                    <img src="assets/chatbot.png" alt="chatbot"
+                        class="w-full h-48 object-cover transition-transform duration-500 group-hover:scale-105" />
+                    <div class="p-5">
+                        <span class="text-xs text-purple-400 uppercase tracking-wider">AI Chatbot</span>
+                        <h3 class="text-lg font-bold mt-1">Interview Simulation Chatbot</h3>
+                        <p class="text-sm text-gray-400 mt-2">
+                            Developed an AI-powered interview simulation chatbot using Ollama (LLaMA 3.2 3B) and
+                            LangChain, deployed in a Streamlit app to provide dynamic question flow and answer
+                            evaluation.
+                        </p>
+                    </div>
+                </a>
+                <a href="assets/SEO.zip" download
+                    class="group relative overflow-hidden rounded-xl shadow-md bg-gray-800 border border-gray-700 block cursor-pointer">
+                    <img src="assets/simple html.png" alt="SEO"
+                        class="w-full h-48 object-cover transition-transform duration-500 group-hover:scale-105" />
+                    <div class="p-5">
+                        <span class="text-xs text-purple-400 uppercase tracking-wider">Web Development</span>
+                        <h3 class="text-lg font-bold mt-1">SEO-Optimized Static Page</h3>
+                        <p class="text-sm text-gray-400 mt-2">
+                            Developed a clean and responsive static webpage using HTML and CSS, applying 10 targeted SEO
+                            keywords to improve search engine indexing and relevance.
+                        </p>
+                    </div>
+                </a>
+                <a href="assets/EPL-prediction.zip" download
+                    class="group relative overflow-hidden rounded-xl shadow-md bg-gray-800 border border-gray-700 block cursor-pointer">
+                    <img src="assets/epl-prediction.png" alt="datascience"
+                        class="w-full h-48 object-cover transition-transform duration-500 group-hover:scale-105" />
+                    <div class="p-5">
+                        <span class="text-xs text-purple-400 uppercase tracking-wider">Data Science</span>
+                        <h3 class="text-lg font-bold mt-1">EPL Match Outcome Prediction</h3>
+                        <p class="text-sm text-gray-400 mt-2">
+                            Built a predictive model for English Premier League match outcomes using machine learning
+                            algorithms, including Random Forest, to analyze historical match data and team performance
+                            metrics.
+                        </p>
+                    </div>
+                </a>
+
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-16 bg-gray-800" data-aos="fade-up">
+        <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <h2 class="text-3xl font-semibold mb-3">Let’s Connect 🚀</h2>
+            <div class="w-16 h-1 bg-purple-500 mx-auto"></div>
+            <p class="mt-4 text-gray-400">
+                Prefer to reach me directly? You can message me via:
+            </p>
+
+            <div class="mt-6 flex justify-center space-x-6">
+                <!-- LinkedIn -->
+                <a href="https://www.linkedin.com/in/kevinivanu/ " target="_blank"
+                    class="flex flex-col items-center text-blue-400 hover:text-blue-300 transition-colors duration-300 group">
+                    <svg class="w-10 h-10 p-2 bg-blue-900/30 rounded-full group-hover:bg-blue-900/50 transition-colors duration-300"
+                        fill="currentColor" viewBox="0 0 24 24">
+                        <path
+                            d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452z" />
+                    </svg>
+                    <span class="mt-2 text-sm">LinkedIn</span>
+                </a>
+
+                <!-- WhatsApp -->
+                <a href="https://wa.me/6282302363010 " target="_blank"
+                    class="flex flex-col items-center text-green-400 hover:text-green-300 transition-colors duration-300 group">
+                    <svg class="w-10 h-10 p-2 bg-green-900/30 rounded-full group-hover:bg-green-900/50 transition-colors duration-300"
+                        fill="currentColor" viewBox="0 0 24 24">
+                        <path
+                            d="M12 0C5.373 0 0 5.373 0 12c0 2.083.538 4.06 1.475 5.824L0 24l6.55-1.707c1.617.638 3.355.977 5.145.977 6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.333c-5.16 0-9.333-4.173-9.333-9.333S6.84 2.667 12 2.667s9.333 4.173 9.333 9.333-4.173 9.333-9.333 9.333z" />
+                        <path
+                            d="M12 14.666c-1.473 0-2.667-1.193-2.667-2.666S10.527 9.333 12 9.333s2.667 1.193 2.667 2.666-1.194 2.666-2.667 2.666z" />
+                        <circle cx="12" cy="12" r="1.333" fill="currentColor" />
+                    </svg>
+                    <span class="mt-2 text-sm">WhatsApp</span>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 py-6 text-center text-sm text-gray-500">
+        © <span id="current-year"></span> Kevin Ivanu |
+        <a href="https://www.linkedin.com/in/kevinivanu/ " target="_blank"
+            class="text-blue-400 hover:text-blue-300 ml-1">LinkedIn</a>
+        •
+        <a href="https://wa.me/6282302363010 " target="_blank"
+            class="text-green-400 hover:text-green-300 ml-1">WhatsApp</a>
+        – Built with 💙 and coffee ☕
+    </footer>
+
+    <!-- AOS JS -->
+    <script src="https://unpkg.com/aos @2.3.4/dist/aos.js"></script>
+
+    <!-- Custom JS -->
+    <script>
+        // Tampilkan tahun dinamis di footer
+        const yearEl = document.getElementById('current-year');
+        if (yearEl) {
+            yearEl.textContent = new Date().getFullYear();
+        }
+
+        // Animasi Skill Bar saat masuk ke viewport
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    document.querySelectorAll('.progress-fill').forEach(pb => {
+                        pb.style.width = pb.getAttribute('data-skill') + '%';
+                    });
+                    observer.unobserve(entry.target); // Stop observasi setelah sekali jalan
+                }
+            });
+        }, { threshold: 0.2 });
+
+        const skillsSection = document.getElementById('skills');
+        if (skillsSection) {
+            observer.observe(skillsSection);
+        }
+
+        // Toggle mobile menu
+        const menuToggle = document.getElementById('menu-toggle');
+        const mobileMenu = document.getElementById('mobile-menu');
+        const menuIconOpen = document.getElementById('menu-icon-open');
+        const menuIconClose = document.getElementById('menu-icon-close');
+
+        if (menuToggle && mobileMenu && menuIconOpen && menuIconClose) {
+            menuToggle.addEventListener('click', () => {
+                mobileMenu.classList.toggle('hidden');
+                menuIconOpen.classList.toggle('hidden');
+                menuIconClose.classList.toggle('hidden');
+            });
+        }
+    </script>
+    <script>
+        function openVideoModal() {
+            const modal = document.getElementById('video-modal');
+            const video = document.getElementById('project-video');
+            modal.classList.remove('hidden');
+            video.play();
+        }
+
+        function closeVideoModal() {
+            const modal = document.getElementById('video-modal');
+            const video = document.getElementById('project-video');
+            modal.classList.add('hidden');
+            video.pause();
+            video.currentTime = 0;
+        }
+    </script>
+</body>
+
+</html>
