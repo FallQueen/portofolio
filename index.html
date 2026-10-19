@@ -16,9 +16,17 @@
     <link href="https://unpkg.com/aos @2.3.4/dist/aos.css" rel="stylesheet">
 
     <style>
+        html {
+            scroll-padding-top: 64px;
+        }
+
         body {
             font-family: 'Inter', sans-serif;
             scroll-behavior: smooth;
+        }
+
+        section[id] {
+            scroll-margin-top: 72px;
         }
 
         .gradient-text {
@@ -40,11 +48,33 @@
             background: linear-gradient(135deg, #8b5cf6, #6366f1);
             border-radius: 999px;
             transition: all 0.3s ease;
+            box-shadow: 0 8px 20px rgba(139, 92, 246, 0.25);
         }
 
         .btn-primary:hover {
             transform: scale(1.05);
-            box-shadow: 0 5px 15px rgba(139, 92, 246, 0.4);
+            box-shadow: 0 10px 25px rgba(139, 92, 246, 0.45);
+        }
+
+        .nav-link {
+            position: relative;
+        }
+
+        .nav-link::after {
+            content: "";
+            position: absolute;
+            left: 0;
+            bottom: -6px;
+            width: 100%;
+            height: 2px;
+            background: linear-gradient(90deg, #60a5fa, #c084fc);
+            transform: scaleX(0);
+            transform-origin: center;
+            transition: transform 0.25s ease;
+        }
+
+        .nav-link:hover::after {
+            transform: scaleX(1);
         }
 
         .section-title::after {
@@ -82,6 +112,101 @@
         .card img:hover {
             transform: scale(1.05);
         }
+
+        .project-card {
+            position: relative;
+            overflow: hidden;
+            transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+            box-shadow: 0 8px 18px rgba(15, 23, 42, 0.18);
+            border: 1px solid rgba(100, 116, 139, 0.35);
+        }
+
+        .project-card::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(135deg, rgba(96, 165, 250, 0.08), rgba(192, 132, 252, 0.06));
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            pointer-events: none;
+        }
+
+        .project-card:hover {
+            transform: translateY(-8px) scale(1.01);
+            box-shadow: 0 22px 45px rgba(96, 165, 250, 0.12), 0 10px 25px rgba(192, 132, 252, 0.12);
+            border-color: rgba(168, 85, 247, 0.75);
+        }
+
+        .project-card:hover::before {
+            opacity: 1;
+        }
+
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            padding: 0.45rem 1rem;
+            border: 1px solid rgba(96, 165, 250, 0.38);
+            background: rgba(15, 23, 42, 0.5);
+            border-radius: 9999px;
+            color: #dbeafe;
+            letter-spacing: 0.06em;
+            text-transform: uppercase;
+            font-size: 0.7rem;
+            font-weight: 700;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 0 0 1px rgba(96, 165, 250, 0.06), 0 10px 30px rgba(59, 130, 246, 0.08);
+        }
+
+        .hero-visual {
+            position: relative;
+            box-shadow: 0 28px 55px rgba(96, 165, 250, 0.18), 0 14px 32px rgba(168, 85, 247, 0.15);
+            border: 1px solid rgba(148, 163, 184, 0.2);
+            background: rgba(15, 23, 42, 0.5);
+        }
+
+        .hero-visual::before {
+            content: "";
+            position: absolute;
+            inset: -12px;
+            border-radius: 9999px;
+            border: 1px solid rgba(147, 197, 253, 0.25);
+            background: radial-gradient(circle at 30% 30%, rgba(96, 165, 250, 0.18), transparent 52%);
+            z-index: -1;
+        }
+
+        .section-shell {
+            padding-top: 5rem;
+            padding-bottom: 5rem;
+        }
+
+        .stat-card {
+            background: rgba(15, 23, 42, 0.75);
+            border: 1px solid rgba(148, 163, 184, 0.18);
+            border-radius: 1rem;
+            padding: 1rem 1.25rem;
+            box-shadow: 0 10px 25px rgba(15, 23, 42, 0.12);
+        }
+
+        #home {
+            position: relative;
+            background:
+                linear-gradient(135deg, rgba(17, 24, 39, 0.9), rgba(17, 24, 39, 0.7)),
+                url('assets/bg.png') center/cover no-repeat;
+        }
+
+        #home::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(circle at 20% 20%, rgba(96, 165, 250, 0.18), transparent 30%),
+                radial-gradient(circle at 80% 30%, rgba(192, 132, 252, 0.12), transparent 30%);
+            pointer-events: none;
+        }
+
+        #home > .max-w-6xl {
+            position: relative;
+            z-index: 1;
+        }
     </style>
 </head>
 
@@ -98,14 +223,16 @@
 
                 <!-- Desktop Menu -->
                 <div class="hidden md:flex space-x-6">
-                    <a href="#home" class="capitalize hover:text-blue-400 transition-colors duration-300">Home</a>
-                    <a href="#about" class="capitalize hover:text-blue-400 transition-colors duration-300">About Me</a>
-                    <a href="#skills" class="capitalize hover:text-blue-400 transition-colors duration-300">Skills</a>
+                    <a href="#home" class="nav-link capitalize hover:text-blue-400 transition-colors duration-300">Home</a>
+                    <a href="#about" class="nav-link capitalize hover:text-blue-400 transition-colors duration-300">About Me</a>
+                    <a href="#skills" class="nav-link capitalize hover:text-blue-400 transition-colors duration-300">Skills</a>
                     <a href="#experience"
-                        class="capitalize hover:text-blue-400 transition-colors duration-300">Experience</a>
+                        class="nav-link capitalize hover:text-blue-400 transition-colors duration-300">Experience</a>
+                    <a href="#certificates"
+                        class="nav-link capitalize hover:text-blue-400 transition-colors duration-300">Certificates</a>
                     <a href="#projects"
-                        class="capitalize hover:text-blue-400 transition-colors duration-300">Projects</a>
-                    <a href="#contact" class="capitalize hover:text-blue-400 transition-colors duration-300">Contact</a>
+                        class="nav-link capitalize hover:text-blue-400 transition-colors duration-300">Projects</a>
+                    <a href="#contact" class="nav-link capitalize hover:text-blue-400 transition-colors duration-300">Contact</a>
                 </div>
 
                 <!-- Mobile Menu Button -->
@@ -132,6 +259,7 @@
                 <a href="#about" class="block px-3 py-2 capitalize rounded-md hover:bg-gray-700">About Me</a>
                 <a href="#skills" class="block px-3 py-2 capitalize rounded-md hover:bg-gray-700">Skills</a>
                 <a href="#experience" class="block px-3 py-2 capitalize rounded-md hover:bg-gray-700">Experience</a>
+                <a href="#certificates" class="block px-3 py-2 capitalize rounded-md hover:bg-gray-700">Certificates</a>
                 <a href="#projects" class="block px-3 py-2 capitalize rounded-md hover:bg-gray-700">Projects</a>
                 <a href="#contact" class="block px-3 py-2 capitalize rounded-md hover:bg-gray-700">Contact</a>
             </div>
@@ -139,27 +267,38 @@
     </nav>
 
     <!-- Hero Section -->
-    <section id="home" class="pt-28 pb-16 min-h-screen flex items-center" data-aos="fade-up">
+    <section id="home" class="pt-28 pb-20 min-h-screen flex items-center" data-aos="fade-up">
         <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col-reverse lg:flex-row items-center gap-10">
             <div class="lg:w-1/2 mt-8 lg:mt-0">
+                <span class="hero-badge text-sm mb-4">Software Engineer</span>
                 <h1 class="text-3xl sm:text-4xl lg:text-5xl font-bold leading-tight mb-4">
-                    <span class="block">Hi, I'm</span>
+                    <span class="block text-slate-100">Hi, I'm</span>
                     <span class="block gradient-text">Kevin Ivanu</span>
                 </h1>
-                <p class="text-lg text-gray-300 mb-6 max-w-lg">
-                    Software Engineering student with a passion for building digital solutions and creating engaging
-                    experiences.
+                <p class="text-lg text-gray-300 mb-6 max-w-lg leading-relaxed">
+                    Software engineer with a passion for building digital solutions, crafting user-centered
+                    products, and turning ideas into impactful experiences.
                 </p>
-                <div class="flex flex-wrap gap-4">
+                <div class="flex flex-wrap gap-4 mb-6">
                     <a href="#projects"
                         class="px-5 py-3 btn-primary text-white rounded-lg transition-all duration-300 font-medium">
                         View My Projects
                     </a>
+                    <a href="assets/CV_KevinIvanu.pdf" download
+                        class="px-5 py-3 border border-purple-400/50 bg-slate-900/50 text-purple-200 rounded-lg hover:border-purple-300 hover:bg-slate-800/70 transition-all duration-300 font-medium">
+                        Download Resume
+                    </a>
+                </div>
+                <div class="flex flex-wrap gap-3 text-sm text-gray-300">
+                    <span class="px-3 py-1 rounded-full bg-slate-800/80 border border-slate-700">Flutter</span>
+                    <span class="px-3 py-1 rounded-full bg-slate-800/80 border border-slate-700">Python</span>
+                    <span class="px-3 py-1 rounded-full bg-slate-800/80 border border-slate-700">UI/UX</span>
+                    <span class="px-3 py-1 rounded-full bg-slate-800/80 border border-slate-700">Digital Marketing</span>
                 </div>
             </div>
             <div class="lg:w-1/2 flex justify-center">
                 <div
-                    class="relative w-48 h-48 sm:w-64 sm:h-64 rounded-full overflow-hidden shadow-xl transform rotate-3 hover:rotate-0 transition-transform duration-500 border border-gray-700">
+                    class="hero-visual relative w-48 h-48 sm:w-64 sm:h-64 rounded-full overflow-hidden transform rotate-3 hover:rotate-0 transition-transform duration-500">
                     <img src="assets/myprofile.jpg" alt="Profile" class="object-cover w-full h-full" />
                 </div>
             </div>
@@ -167,63 +306,64 @@
     </section>
 
     <!-- About Section -->
-    <section id="about" class="py-16 bg-gray-800" data-aos="fade-up">
+    <section id="about" class="section-shell bg-gray-800" data-aos="fade-up">
         <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center mb-12">
                 <h2 class="text-3xl font-semibold mb-3">About Me</h2>
                 <div class="w-16 h-1 bg-purple-500 mx-auto"></div>
                 <p class="mt-4 text-gray-400 max-w-xl mx-auto">
-                    A dedicated software engineering student ready to take on new challenges and grow professionally.
+                    A dedicated software engineer ready to take on new challenges and keep growing professionally.
                 </p>
-            </div>
 
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-                <div>
-                    <h3 class="text-xl font-bold mb-3">Who I Am</h3>
-                    <p class="text-gray-300 mb-4">
-                        Kevin is a diligent and motivated student committed to professional growth and excellence. He
-                        proactively builds meaningful relationships and seeks valuable work experience to enhance his
-                        skills and knowledge.
-                    </p>
-                    <p class="text-gray-300 mb-6">
-                        Goal-oriented and adaptable, Kevin contributes effectively to team objectives through
-                        collaboration and a results-driven mindset.
-                    </p>
-                    <a href="assets/CV_KevinIvanu.pdf" download
-                        class="inline-block px-4 py-2 bg-purple-900/50 text-purple-300 rounded-full hover:bg-purple-900/80 transition-colors duration-300">
-                        Download My Resume
-                    </a>
-                </div>
-                <div class="space-y-6">
-                    <div>
-                        <h4 class="font-semibold text-lg mb-2">Education</h4>
-                        <ul class="space-y-4 text-gray-400">
-                            <li>
-                                <strong>Universitas Prasetiya Mulya</strong><br />
-                                <span class="text-sm text-gray-500">2022 – Present</span><br />
-                                B.Sc. in Software Engineering
-                            </li>
-                            <li>
-                                <strong>Tunas Daud Bali High School</strong><br />
-                                <span class="text-sm text-gray-500">2019 – 2022</span><br />
-                                Science Major
-                            </li>
-                        </ul>
+                <div class="mt-10 grid grid-cols-1 gap-8">
+                    <div class="text-center max-w-3xl mx-auto">
+                        <h3 class="text-xl font-bold mb-3">Who I Am</h3>
+                        <p class="text-gray-300 mb-4 leading-relaxed">
+                            Kevin is a diligent and motivated software engineer committed to professional growth and
+                            excellence. He proactively builds meaningful relationships and seeks opportunities to create
+                            impactful, user-centered digital solutions.
+                        </p>
+                        <p class="text-gray-300 mb-6 leading-relaxed">
+                            Goal-oriented and adaptable, Kevin contributes effectively to team objectives through
+                            collaboration, problem-solving, and a results-driven mindset.
+                        </p>
+                        <a href="assets/CV_KevinIvanu.pdf" download
+                            class="inline-block px-4 py-2 bg-purple-900/50 text-purple-300 rounded-full hover:bg-purple-900/80 transition-colors duration-300">
+                            Download My Resume
+                        </a>
                     </div>
-                    <div>
-                        <h4 class="font-semibold text-lg mb-2">Training</h4>
-                        <ul class="space-y-4 text-gray-400">
-                            <li>
-                                <strong>Computer Course Center Bali</strong><br />
-                                <span class="text-sm text-gray-500">August 2021 – February 2022</span><br />
-                                Microsoft Office Mastery, Web Development & SEO
-                            </li>
-                            <li>
-                                <strong>Axcelio.id</strong><br />
-                                <span class="text-sm text-gray-500">March 2022 – September 2022</span><br />
-                                Front-End Web Development, Graphic & Video Editing
-                            </li>
-                        </ul>
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 text-center md:text-left">
+                        <div class="bg-gray-900/60 p-6 rounded-xl border border-gray-700">
+                            <h4 class="font-semibold text-lg mb-3">Education</h4>
+                            <ul class="space-y-4 text-gray-400">
+                                <li>
+                                    <strong>Universitas Prasetiya Mulya</strong><br />
+                                    <span class="text-sm text-gray-500">2022 – Present</span><br />
+                                    B.Sc. in Software Engineering
+                                </li>
+                                <li>
+                                    <strong>Tunas Daud Bali High School</strong><br />
+                                    <span class="text-sm text-gray-500">2019 – 2022</span><br />
+                                    Science Major
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="bg-gray-900/60 p-6 rounded-xl border border-gray-700">
+                            <h4 class="font-semibold text-lg mb-3">Training</h4>
+                            <ul class="space-y-4 text-gray-400">
+                                <li>
+                                    <strong>Computer Course Center Bali</strong><br />
+                                    <span class="text-sm text-gray-500">August 2021 – February 2022</span><br />
+                                    Microsoft Office Mastery, Web Development & SEO
+                                </li>
+                                <li>
+                                    <strong>Axcelio.id</strong><br />
+                                    <span class="text-sm text-gray-500">March 2022 – September 2022</span><br />
+                                    Front-End Web Development, Graphic & Video Editing
+                                </li>
+                            </ul>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -231,14 +371,33 @@
     </section>
 
     <!-- Skills Section -->
-    <section id="skills" class="py-16" data-aos="fade-up">
-        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+    <section id="skills" class="section-shell" data-aos="fade-up">
+        <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center mb-12">
                 <h2 class="text-3xl font-semibold mb-3">My Skills</h2>
                 <div class="w-16 h-1 bg-purple-500 mx-auto"></div>
                 <p class="mt-4 text-gray-400">
                     Here are some of the tools and technologies I've worked with.
                 </p>
+            </div>
+
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-10">
+                <div class="stat-card text-center">
+                    <div class="text-2xl font-bold gradient-text">3+</div>
+                    <div class="text-sm text-gray-400 mt-1">Years</div>
+                </div>
+                <div class="stat-card text-center">
+                    <div class="text-2xl font-bold gradient-text">12+</div>
+                    <div class="text-sm text-gray-400 mt-1">Projects</div>
+                </div>
+                <div class="stat-card text-center">
+                    <div class="text-2xl font-bold gradient-text">8+</div>
+                    <div class="text-sm text-gray-400 mt-1">Skills</div>
+                </div>
+                <div class="stat-card text-center">
+                    <div class="text-2xl font-bold gradient-text">100%</div>
+                    <div class="text-sm text-gray-400 mt-1">Driven</div>
+                </div>
             </div>
 
             <div class="space-y-6">
@@ -276,6 +435,15 @@
                     </div>
                     <div class="progress-bar">
                         <div class="progress-fill" style="width: 0%" data-skill="80"></div>
+                    </div>
+                </div>
+                <div>
+                    <div class="flex justify-between mb-1">
+                        <span>CorelDRAW</span>
+                        <span>Skilled</span>
+                    </div>
+                    <div class="progress-bar">
+                        <div class="progress-fill" style="width: 0%" data-skill="75"></div>
                     </div>
                 </div>
                 <div>
@@ -319,7 +487,7 @@
     </section>
 
     <!-- Experience Section -->
-    <section id="experience" class="py-16 bg-gray-800" data-aos="fade-up">
+    <section id="experience" class="section-shell bg-gray-800" data-aos="fade-up">
         <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center mb-12">
                 <h2 class="text-3xl font-semibold mb-3">Work Experience</h2>
@@ -331,12 +499,12 @@
 
             <div class="space-y-6">
                 <div class="card bg-gray-900 p-5 rounded-lg border border-gray-700">
-                    <h3 class="text-lg font-bold">Assistant Supervisor at PT. Surya Madistrindo</h3>
-                    <p class="text-sm text-gray-500">Jan 2023 – Feb 2023</p>
+                    <h3 class="text-lg font-bold">PT Surya Madistrindo, Jakarta — IT System Transformation Department</h3>
+                    <p class="text-sm text-gray-500">August 2025 – December 2025</p>
                     <ul class="mt-2 text-gray-300 list-disc pl-5 space-y-1">
-                        <li>Assisted in administrative tasks and process management</li>
-                        <li>Gained knowledge in embedded systems and their applications</li>
-                        <li>Supported daily operations to ensure efficiency in workflow</li>
+                        <li>Developed and converted the company’s web-based application into a cross-platform mobile app using Flutter.</li>
+                        <li>Continued the development of modules and improved system functionality in the company’s internal project (project manager module).</li>
+                        <li>Collaborated with the development team to ensure the application performed optimally and responsively.</li>
                     </ul>
                 </div>
 
@@ -353,8 +521,49 @@
         </div>
     </section>
 
+    <!-- Certifications Section -->
+    <section id="certificates" class="section-shell bg-gray-800" data-aos="fade-up">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl font-semibold mb-3">Certificates</h2>
+                <div class="w-16 h-1 bg-purple-500 mx-auto"></div>
+                <p class="mt-4 text-gray-400">
+                    Professional certifications and training that support my skills and growth.
+                </p>
+            </div>
+
+            <div class="space-y-5">
+                <a href="assets/toeic.png" target="_blank" rel="noopener noreferrer"
+                    class="block card bg-gray-900 p-5 rounded-lg border border-gray-700 hover:border-purple-500 transition-colors duration-300">
+                    <p class="text-lg font-bold">TOEIC (Test of English for International Communication)</p>
+                    <p class="text-sm text-gray-400 mt-1">Score: 865 — March 2026</p>
+                </a>
+                <a href="assets/KEVIN%20MICROSOFT%20OFFICE.pdf" target="_blank" rel="noopener noreferrer"
+                    class="block card bg-gray-900 p-5 rounded-lg border border-gray-700 hover:border-purple-500 transition-colors duration-300">
+                    <p class="text-lg font-bold">Microsoft Office</p>
+                    <p class="text-sm text-gray-400 mt-1">LKP Citra Komputer Malang — September 2026</p>
+                </a>
+                <a href="assets/KEVIN%20DIGITAL%20MARKETING.pdf" target="_blank" rel="noopener noreferrer"
+                    class="block card bg-gray-900 p-5 rounded-lg border border-gray-700 hover:border-purple-500 transition-colors duration-300">
+                    <p class="text-lg font-bold">Digital Marketing</p>
+                    <p class="text-sm text-gray-400 mt-1">LKP Citra Komputer Malang — October 2026</p>
+                </a>
+                <a href="assets/KEVIN%20DESAIN%20GRAFIS.pdf" target="_blank" rel="noopener noreferrer"
+                    class="block card bg-gray-900 p-5 rounded-lg border border-gray-700 hover:border-purple-500 transition-colors duration-300">
+                    <p class="text-lg font-bold">Desain Grafis</p>
+                    <p class="text-sm text-gray-400 mt-1">LKP Citra Komputer Malang — October 2026</p>
+                </a>
+                <a href="https://class.argiaacademy.com/verify/JRXBZZ" target="_blank" rel="noopener noreferrer"
+                    class="block card bg-gray-900 p-5 rounded-lg border border-gray-700 hover:border-purple-500 transition-colors duration-300">
+                    <p class="text-lg font-bold">AI Starter Workshop</p>
+                    <p class="text-sm text-gray-400 mt-1">Argia Academy — October 2026</p>
+                </a>
+            </div>
+        </div>
+    </section>
+
     <!-- Projects Section -->
-    <section id="projects" class="py-16" data-aos="fade-up">
+    <section id="projects" class="section-shell" data-aos="fade-up">
         <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center mb-12">
                 <h2 class="text-3xl font-semibold mb-3">Projects</h2>
@@ -365,8 +574,52 @@
             </div>
 
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <a href="https://coop.prasetiyamulya.ac.id/login" target="_blank" rel="noopener noreferrer"
+                    class="project-card group relative overflow-hidden rounded-xl shadow-md bg-gray-800 border border-gray-700 block hover:shadow-xl transition-shadow duration-300">
+                    <img src="assets/coop.png" alt="Co-op Management Platform"
+                        class="w-full h-48 object-cover transition-transform duration-500 group-hover:scale-105" />
+                    <div class="p-5">
+                        <span class="text-xs text-purple-400 uppercase tracking-wider">FULL-STACK DEVELOPMENT</span>
+                        <h3 class="text-lg font-bold mt-1">Co-op Management Platform</h3>
+                        <p class="text-sm text-gray-400 mt-2">
+                            Developed a comprehensive web-based platform to automate the internship management lifecycle
+                            for Applied STEM students at Universitas Prasetiya Mulya. Built using Django and PostgreSQL,
+                            featuring centralized job boards and instant industry supervisor verification via magic links.
+                        </p>
+                    </div>
+                </a>
+
+                <div class="project-card group relative overflow-hidden rounded-xl shadow-md bg-gray-800 border border-gray-700">
+                    <img src="assets/Aprilia.png" alt="Aprilia Project"
+                        class="w-full h-48 object-cover transition-transform duration-500 group-hover:scale-105" />
+                    <div class="p-5">
+                        <span class="text-xs text-purple-400 uppercase tracking-wider">APP DEVELOPMENT</span>
+                        <h3 class="text-lg font-bold mt-1">Aprilia</h3>
+                        <p class="text-sm text-gray-400 mt-2">
+                            Converted enterprise web applications into cross-platform mobile interfaces using Flutter.
+                            Integrated Go (Golang) backend APIs, PostgreSQL database, and Firebase push notifications
+                            to optimize operational workflows.
+                        </p>
+                    </div>
+                </div>
+
+                <a href="https://tipsbykevin.blogspot.com/2026/10/resident-evil-veronica.html" target="_blank" rel="noopener noreferrer"
+                    class="project-card group relative overflow-hidden rounded-xl shadow-md bg-gray-800 border border-gray-700 block hover:shadow-xl transition-shadow duration-300">
+                    <img src="assets/blogger.png" alt="Gaming & Pop Culture Blog"
+                        class="w-full h-48 object-cover transition-transform duration-500 group-hover:scale-105" />
+                    <div class="p-5">
+                        <span class="text-xs text-purple-400 uppercase tracking-wider">CONTENT & SEO</span>
+                        <h3 class="text-lg font-bold mt-1">Gaming & Pop Culture Blog</h3>
+                        <p class="text-sm text-gray-400 mt-2">
+                            Developed and published a niche entertainment blog on Blogger as part of a Digital Marketing
+                            practical project. Focused on SEO content strategy, engaging game reviews, and responsive web
+                            layout customization.
+                        </p>
+                    </div>
+                </a>
+
                 <a href="https://udsarimanggar.com/ " target="_blank" rel="noopener noreferrer"
-                    class="group relative overflow-hidden rounded-xl shadow-md bg-gray-800 border border-gray-700 block hover:shadow-xl transition-shadow duration-300">
+                    class="project-card group relative overflow-hidden rounded-xl shadow-md bg-gray-800 border border-gray-700 block hover:shadow-xl transition-shadow duration-300">
                     <img src="assets/website.png" alt="WordPress"
                         class="w-full h-48 object-cover transition-transform duration-500 group-hover:scale-105" />
                     <div class="p-5">
@@ -380,7 +633,7 @@
                 </a>
                 <!-- flutter Section -->
                 <!-- Project 2 - Flutter -->
-                <div class="relative group overflow-hidden rounded-xl shadow-md bg-gray-800 border border-gray-700 cursor-pointer"
+                <div class="project-card relative group overflow-hidden rounded-xl shadow-md bg-gray-800 border border-gray-700 cursor-pointer"
                     onclick="openVideoModal()">
                     <!-- Thumbnail Image -->
                     <div class="overflow-hidden w-full h-48">
@@ -429,7 +682,7 @@
                 <!-- end flutter Section -->
                 <a href="https://www.figma.com/files/team/1219546436443987379/project/86199899/Team-project?fuid=1219546427296412159 "
                     target="_blank" rel="noopener noreferrer"
-                    class="group relative overflow-hidden rounded-xl shadow-md bg-gray-800 border border-gray-700 hover:shadow-xl transition-all duration-300">
+                    class="project-card group relative overflow-hidden rounded-xl shadow-md bg-gray-800 border border-gray-700 hover:shadow-xl transition-all duration-300">
                     <img src="assets/figma.png" alt="Figma Project"
                         class="w-full h-48 object-cover transition-transform duration-500 group-hover:scale-105" />
                     <div class="p-5">
@@ -442,7 +695,7 @@
                     </div>
                 </a>
                 <a href="assets/llama-chatbot.zip" download
-                    class="group relative overflow-hidden rounded-xl shadow-md bg-gray-800 border border-gray-700 block cursor-pointer">
+                    class="project-card group relative overflow-hidden rounded-xl shadow-md bg-gray-800 border border-gray-700 block cursor-pointer">
                     <img src="assets/chatbot.png" alt="chatbot"
                         class="w-full h-48 object-cover transition-transform duration-500 group-hover:scale-105" />
                     <div class="p-5">
@@ -456,7 +709,7 @@
                     </div>
                 </a>
                 <a href="assets/SEO.zip" download
-                    class="group relative overflow-hidden rounded-xl shadow-md bg-gray-800 border border-gray-700 block cursor-pointer">
+                    class="project-card group relative overflow-hidden rounded-xl shadow-md bg-gray-800 border border-gray-700 block cursor-pointer">
                     <img src="assets/simple html.png" alt="SEO"
                         class="w-full h-48 object-cover transition-transform duration-500 group-hover:scale-105" />
                     <div class="p-5">
@@ -469,7 +722,7 @@
                     </div>
                 </a>
                 <a href="assets/EPL-prediction.zip" download
-                    class="group relative overflow-hidden rounded-xl shadow-md bg-gray-800 border border-gray-700 block cursor-pointer">
+                    class="project-card group relative overflow-hidden rounded-xl shadow-md bg-gray-800 border border-gray-700 block cursor-pointer">
                     <img src="assets/epl-prediction.png" alt="datascience"
                         class="w-full h-48 object-cover transition-transform duration-500 group-hover:scale-105" />
                     <div class="p-5">
@@ -482,11 +735,12 @@
                         </p>
                     </div>
                 </a>
-
+            </div>
+        </div>
     </section>
 
     <!-- Contact Section -->
-    <section id="contact" class="py-16 bg-gray-800" data-aos="fade-up">
+    <section id="contact" class="section-shell bg-gray-800" data-aos="fade-up">
         <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
             <h2 class="text-3xl font-semibold mb-3">Let’s Connect 🚀</h2>
             <div class="w-16 h-1 bg-purple-500 mx-auto"></div>
@@ -498,7 +752,7 @@
                 <!-- LinkedIn -->
                 <a href="https://www.linkedin.com/in/kevinivanu/ " target="_blank"
                     class="flex flex-col items-center text-blue-400 hover:text-blue-300 transition-colors duration-300 group">
-                    <svg class="w-10 h-10 p-2 bg-blue-900/30 rounded-full group-hover:bg-blue-900/50 transition-colors duration-300"
+                    <svg class="w-10 h-10 p-2 bg-blue-500/20 rounded-full ring-1 ring-blue-400/40 group-hover:bg-blue-500/30 transition-all duration-300 shadow-md shadow-blue-500/20"
                         fill="currentColor" viewBox="0 0 24 24">
                         <path
                             d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452z" />
@@ -509,13 +763,9 @@
                 <!-- WhatsApp -->
                 <a href="https://wa.me/6282302363010 " target="_blank"
                     class="flex flex-col items-center text-green-400 hover:text-green-300 transition-colors duration-300 group">
-                    <svg class="w-10 h-10 p-2 bg-green-900/30 rounded-full group-hover:bg-green-900/50 transition-colors duration-300"
-                        fill="currentColor" viewBox="0 0 24 24">
-                        <path
-                            d="M12 0C5.373 0 0 5.373 0 12c0 2.083.538 4.06 1.475 5.824L0 24l6.55-1.707c1.617.638 3.355.977 5.145.977 6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.333c-5.16 0-9.333-4.173-9.333-9.333S6.84 2.667 12 2.667s9.333 4.173 9.333 9.333-4.173 9.333-9.333 9.333z" />
-                        <path
-                            d="M12 14.666c-1.473 0-2.667-1.193-2.667-2.666S10.527 9.333 12 9.333s2.667 1.193 2.667 2.666-1.194 2.666-2.667 2.666z" />
-                        <circle cx="12" cy="12" r="1.333" fill="currentColor" />
+                    <svg class="w-10 h-10 p-2 bg-green-500/20 rounded-full ring-1 ring-green-400/40 group-hover:bg-green-500/30 transition-all duration-300 shadow-md shadow-green-500/20"
+                        viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-label="WhatsApp">
+                        <path d="M20.52 3.48A11.91 11.91 0 0 0 12.03 0C5.53 0 .17 5.37.17 11.87c0 2.09.55 4.14 1.59 5.94L0 24l6.46-1.7a11.91 11.91 0 0 0 5.57 1.7h.01c6.5 0 11.86-5.37 11.86-11.87 0-3.17-1.24-6.16-3.48-8.4ZM12.03 21.7h-.01a9.88 9.88 0 0 1-5.03-1.38l-.36-.21-3.83 1.01 1.02-3.73-.24-.38A9.82 9.82 0 0 1 2.2 11.87c0-5.45 4.43-9.88 9.89-9.88 2.63 0 5.1 1.03 6.96 2.9a9.79 9.79 0 0 1 2.88 6.98c0 5.45-4.43 9.88-9.89 9.88Zm5.4-7.38c-.29-.15-1.72-.85-1.99-.95-.27-.1-.47-.15-.67.15-.2.29-.77.95-.94 1.14-.17.2-.35.22-.65.07-.29-.15-1.22-.45-2.33-1.44-.86-.77-1.44-1.71-1.61-2-.17-.29-.02-.45.13-.59.13-.13.29-.35.44-.52.15-.17.2-.29.29-.48.1-.19.05-.36-.02-.5-.07-.15-.67-1.62-.92-2.22-.24-.58-.49-.5-.67-.51l-.57-.01c-.2 0-.52.07-.79.36-.27.29-1.03 1.01-1.03 2.46 0 1.45 1.05 2.86 1.2 3.06.15.2 2.08 3.18 5.04 4.46.7.3 1.24.48 1.67.62.71.22 1.35.19 1.86.12.57-.09 1.72-.7 1.96-1.38.24-.68.24-1.27.17-1.39-.07-.12-.27-.2-.57-.35Z" fill="currentColor"/>
                     </svg>
                     <span class="mt-2 text-sm">WhatsApp</span>
                 </a>
@@ -525,13 +775,30 @@
 
     <!-- Footer -->
     <footer class="bg-gray-900 py-6 text-center text-sm text-gray-500">
-        © <span id="current-year"></span> Kevin Ivanu |
-        <a href="https://www.linkedin.com/in/kevinivanu/ " target="_blank"
-            class="text-blue-400 hover:text-blue-300 ml-1">LinkedIn</a>
-        •
-        <a href="https://wa.me/6282302363010 " target="_blank"
-            class="text-green-400 hover:text-green-300 ml-1">WhatsApp</a>
-        – Built with 💙 and coffee ☕
+        <div class="flex flex-wrap items-center justify-center gap-2">
+            <span>© <span id="current-year"></span> Kevin Ivanu</span>
+            <span>|</span>
+            <a href="https://www.linkedin.com/in/kevinivanu/ " target="_blank"
+                class="text-blue-400 hover:text-blue-300 inline-flex items-center gap-1">
+                <span class="inline-flex items-center justify-center w-6 h-6 rounded-full bg-blue-500/20 ring-1 ring-blue-400/40 shadow-sm shadow-blue-500/20">
+                    <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg" aria-label="LinkedIn">
+                        <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452z" />
+                    </svg>
+                </span>
+                LinkedIn
+            </a>
+            <span>•</span>
+            <a href="https://wa.me/6282302363010 " target="_blank"
+                class="text-green-400 hover:text-green-300 inline-flex items-center gap-1">
+                <span class="inline-flex items-center justify-center w-6 h-6 rounded-full bg-green-500/20 ring-1 ring-green-400/40 shadow-sm shadow-green-500/20">
+                    <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg" aria-label="WhatsApp">
+                        <path d="M20.52 3.48A11.91 11.91 0 0 0 12.03 0C5.53 0 .17 5.37.17 11.87c0 2.09.55 4.14 1.59 5.94L0 24l6.46-1.7a11.91 11.91 0 0 0 5.57 1.7h.01c6.5 0 11.86-5.37 11.86-11.87 0-3.17-1.24-6.16-3.48-8.4ZM12.03 21.7h-.01a9.88 9.88 0 0 1-5.03-1.38l-.36-.21-3.83 1.01 1.02-3.73-.24-.38A9.82 9.82 0 0 1 2.2 11.87c0-5.45 4.43-9.88 9.89-9.88 2.63 0 5.1 1.03 6.96 2.9a9.79 9.79 0 0 1 2.88 6.98c0 5.45-4.43 9.88-9.89 9.88Zm5.4-7.38c-.29-.15-1.72-.85-1.99-.95-.27-.1-.47-.15-.67.15-.2.29-.77.95-.94 1.14-.17.2-.35.22-.65.07-.29-.15-1.22-.45-2.33-1.44-.86-.77-1.44-1.71-1.61-2-.17-.29-.02-.45.13-.59.13-.13.29-.35.44-.52.15-.17.2-.29.29-.48.1-.19.05-.36-.02-.5-.07-.15-.67-1.62-.92-2.22-.24-.58-.49-.5-.67-.51l-.57-.01c-.2 0-.52.07-.79.36-.27.29-1.03 1.01-1.03 2.46 0 1.45 1.05 2.86 1.2 3.06.15.2 2.08 3.18 5.04 4.46.7.3 1.24.48 1.67.62.71.22 1.35.19 1.86.12.57-.09 1.72-.7 1.96-1.38.24-.68.24-1.27.17-1.39-.07-.12-.27-.2-.57-.35Z" />
+                    </svg>
+                </span>
+                WhatsApp
+            </a>
+            <span>– Built with 💙 and coffee ☕</span>
+        </div>
     </footer>
 
     <!-- AOS JS -->
